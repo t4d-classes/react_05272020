@@ -1,4 +1,4 @@
-# Welcome to the Front-End Web Development Boot Camp
+# Welcome to Introduction to React
 
 ## Instructor Information
 
