@@ -14,6 +14,7 @@ const colorList = [
 ReactDOM.render(
   <>
     <ColorTool colors={colorList} />
+    <ColorTool colors={colorList} />
     <CarTool />
   </>,
   document.querySelector('#root'),
