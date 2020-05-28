@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const CarTable = (props) => {
+import { CarViewRow } from './CarViewRow';
+
+export const CarTable = ({ cars, onDeleteCar }) => {
 
   return (
     <table>
@@ -12,17 +14,12 @@ export const CarTable = (props) => {
           <th>Year</th>
           <th>Color</th>
           <th>Price</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {props.cars.map(c => <tr key={c.id}>
-          <td>{c.id}</td>
-          <td>{c.make}</td>
-          <td>{c.model}</td>
-          <td>{c.year}</td>
-          <td>{c.color}</td>
-          <td>{c.price}</td>
-        </tr>)}
+        {cars.map(c =>
+          <CarViewRow key={c.id} car={c} onDeleteCar={onDeleteCar} />)}
       </tbody>
     </table>
   );
