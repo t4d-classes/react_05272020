@@ -1,26 +1,13 @@
 import React from 'react';
 
-export const ColorTool = (tommy) => {
+import { ToolHeader } from './ToolHeader';
+import { ColorList } from './ColorList';
 
-  // props.colors.push({
-  //   id: 6, name: 'purple',
-  // });
-
-  // props.newProp = 'test';
-  // props.colors = [];
-  // delete props.colors;
-
-  // const colors = props.colors;
-  // colors.push({ })
-  // console.log(Object.isFrozen(props));
+export const ColorTool = (props) => {
 
   return <>
-    <header>
-      <h1>Color Tool</h1>
-    </header>
-    <ul>
-      {tommy.colors.map( (c) => <li key={c.id}>{c.name}</li>)}
-    </ul>
+    <ToolHeader headerText="Color Tool" />
+    <ColorList colors={props.colors} />
   </>;
 
 };
