@@ -18,9 +18,9 @@
 
 ## Content Schedule
 
-- Day 1 - What is React, ES2015 Modules, Arrow Functions, JSX, React Children, React Router, Layout, Component Logic, Props, Prop Types
-- Day 2 - Hooks, State, Forms, Event Handlers, Component Composition, State Management with Context
-- Day 3 - Connecting to REST API, Performance Optimizations, Class-based Components, Modals
+- Day 1 - What is React, ES2015 Modules, Arrow Functions, JSX, Component Logic, Props, Prop Types
+- Day 2 - Hooks, State, Forms, Event Handlers, Component Composition
+- Day 3 - Custom Hooks, State Management with Context, Connecting to REST API, Performance Optimizations, Class-based Components, React Router, Unit Testing
 
 ## How to Use the Instructor's Version
 
