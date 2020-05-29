@@ -26,17 +26,24 @@ export class Cars {
     return await res.json();
   }
 
-  replace(car) {
-    // const carIndex = this._cars.findIndex(c => c.id === car.id);
-    // const newCars = this._cars.concat();
-    // newCars[carIndex] = car;
-    // this._cars = newCars;
-    return this;
+  async replace(car) {
+    
+    const res = await fetch(this._baseUrl + '/' + encodeURIComponent(car.id), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(car),
+    });
+
+    return await res.json();
   }
 
-  remove(carId) {
-    // this._cars = this._cars.filter(c => c.id !== carId);
-    return this;
+  async remove(carId) {
+
+    const res = await fetch(this._baseUrl + '/' + encodeURIComponent(carId), {
+      method: 'DELETE',
+    });
+
+    return await res.json();
   }
 
 }

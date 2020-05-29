@@ -42,12 +42,16 @@ export const CarStoreProvider = ({ children }) => {
           setEditCarId(-1);
         });
     },
-    onSaveCar(car) {
-      setCars(carsSvc.replace(car).all());
+    async onSaveCar(car) {
+      await carsSvc.replace(car);
+      const cars = await carsSvc.all()
+      setCars(cars);
       setEditCarId(-1);
     },
-    onDeleteCar(carId) {
-      setCars(carsSvc.remove(carId).all());
+    async onDeleteCar(carId) {
+      await carsSvc.remove(carId);
+      const cars = await carsSvc.all()
+      setCars(cars);
       setEditCarId(-1);
     },
     onEditCar(carId) {
