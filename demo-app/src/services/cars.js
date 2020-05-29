@@ -4,17 +4,26 @@ export class Cars {
     this._baseUrl = baseUrl;
   }
 
-  all() {
-    return fetch(this._baseUrl)
-      .then(res => res.json());
+  // all() {
+  //   return fetch(this._baseUrl)
+  //     .then(res => res.json())
+  //     .catch(err => );
+  // }
+
+  async all() {
+    const res = await fetch(this._baseUrl);
+    return await res.json();
   }
 
-  append(car) {
-    // this._cars = this._cars.concat({
-    //   ...car,
-    //   id: Math.max(...this._cars.map(c => c.id), 0) + 1,
-    // });
-    return this;
+  async append(car) {
+    
+    const res = await fetch(this._baseUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(car),
+    });
+
+    return await res.json();
   }
 
   replace(car) {

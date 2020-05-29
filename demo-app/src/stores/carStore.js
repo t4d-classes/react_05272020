@@ -13,17 +13,34 @@ export const CarStoreProvider = ({ children }) => {
 
   const [ cars, setCars ] = useState([] /* carsSvc.all() */);
   const [ editCarId, setEditCarId ] = useState(-1);
+  const [ errorMessage, setErrorMessage ] = useState('');
 
   const carStoreContextValue = {
     cars,
     editCarId,
-    onRefreshCars() {
-      return carsSvc.all()
-        .then(cars => setCars(cars));
+    errorMessage,
+    async onRefreshCars() {
+      try {
+        const cars = await carsSvc.all()
+        setCars(cars);
+      } catch (err) {
+        setErrorMessage(err.message);
+      }
     },
+    // async onAddCar(car) {
+    //   await carsSvc.append(car);
+    //   const cars = await carsSvc.all()
+    //   setCars(cars);
+    //   setEditCarId(-1);
+    // },
     onAddCar(car) {
-      setCars(carsSvc.append(car).all());
-      setEditCarId(-1);
+      return carsSvc
+        .append(car)
+        .then(() => carsSvc.all())
+        .then(cars => {
+          setCars(cars);
+          setEditCarId(-1);
+        });
     },
     onSaveCar(car) {
       setCars(carsSvc.replace(car).all());
