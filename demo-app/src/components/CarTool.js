@@ -28,17 +28,13 @@ export const CarTool = (props) => {
     newCars[carIndex] = car;
     setCars(newCars);
     setEditCarId(-1);
-  }
-
-  const editCar = carId => {
-    setEditCarId(carId);
-  }
+  };
 
   return (
     <>
       <ToolHeader headerText="Car Tool" />
       <CarTable cars={cars} editCarId={editCarId}
-        onEditCar={editCar} onDeleteCar={deleteCar}
+        onEditCar={setEditCarId} onDeleteCar={deleteCar}
         onSaveCar={saveCar} onCancelCar={() => setEditCarId(-1)} />
       <CarForm onSubmitCar={addCar} buttonText="Add Car" />
     </>

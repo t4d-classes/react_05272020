@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const CarEditRow = ({ car, onSaveCar, onCancelCar }) => {
+export const CarEditRow = ({ car, onSaveCar, onCancelCar: cancelCar }) => {
 
   const [ carForm, setCarForm ] = useState({ ...car });
 
@@ -26,7 +26,7 @@ export const CarEditRow = ({ car, onSaveCar, onCancelCar }) => {
       <td><input type="number" name="price" value={carForm.price} onChange={change} /></td>
       <td>
         <button type="button" onClick={saveCar}>Save</button>
-        <button type="button" onClick={onCancelCar}>Cancel</button>
+        <button type="button" onClick={cancelCar}>Cancel</button>
       </td>
     </tr>
   );

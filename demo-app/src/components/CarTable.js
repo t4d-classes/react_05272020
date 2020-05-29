@@ -5,8 +5,8 @@ import { CarEditRow } from './CarEditRow';
 
 export const CarTable = ({
   cars, editCarId,
-  onEditCar, onDeleteCar,
-  onSaveCar, onCancelCar,
+  onEditCar: editCar, onDeleteCar: deleteCar,
+  onSaveCar: saveCar, onCancelCar: cancelCar,
 }) => {
 
   return (
@@ -25,9 +25,10 @@ export const CarTable = ({
       <tbody>
         {cars.map(c =>
           c.id === editCarId
-            ? <CarEditRow key={c.id} car={c} onSaveCar={onSaveCar} onCancelCar={onCancelCar} />
+            ? <CarEditRow key={c.id} car={c}
+                onSaveCar={saveCar} onCancelCar={cancelCar} />
             : <CarViewRow key={c.id} car={c}
-                onEditCar={onEditCar} onDeleteCar={onDeleteCar} />)}
+                onEditCar={editCar} onDeleteCar={deleteCar} />)}
       </tbody>
     </table>
   );
