@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { ToolHeader } from './ToolHeader';
 import { CarTable } from './CarTable';
@@ -8,8 +8,14 @@ export const CarTool = ({
   cars, editCarId,
   onAddCar, onSaveCar,
   onDeleteCar, onEditCar,
-  onCancelCar,
+  onCancelCar, onRefreshCars,
 }) => {
+
+  useEffect(() => {
+
+    onRefreshCars();
+
+  }, []);
 
   return (
     <>
