@@ -5,7 +5,7 @@ import { CarTable } from './CarTable';
 import { CarForm } from './CarForm';
 
 export const CarTool = ({
-  cars, editCarId,
+  cars, editCarId, errorMessage,
   onAddCar, onSaveCar,
   onDeleteCar, onEditCar,
   onCancelCar, onRefreshCars,
@@ -20,6 +20,8 @@ export const CarTool = ({
   return (
     <>
       <ToolHeader headerText="Car Tool" />
+      {errorMessage && <div>{errorMessage}</div>}
+      <button type="button" onClick={onRefreshCars}>Refresh</button>
       <CarTable cars={cars} editCarId={editCarId}
         onEditCar={onEditCar} onDeleteCar={onDeleteCar}
         onSaveCar={onSaveCar} onCancelCar={onCancelCar} />
