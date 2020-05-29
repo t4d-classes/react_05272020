@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useForm } from '../hooks/useForm';
 
 export const CarEditRow = ({ car, onSaveCar, onCancelCar: cancelCar }) => {
 
-  const [ carForm, setCarForm ] = useState({ ...car });
-
-  const change = (e) => {
-    setCarForm({
-      ...carForm,
-      [ e.target.name ]: e.target.type === 'number'
-        ? Number(e.target.value) : e.target.value,
-    });
-  };
+  const [ carForm, change ] = useForm({
+    make: '', model: '', year: 1900, color: '', price: 0,
+  });
 
   const saveCar = () => {
     onSaveCar({ ...carForm });
