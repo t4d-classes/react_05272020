@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 import { Cars } from '../services/cars';
 
@@ -9,7 +9,7 @@ const CarStoreContext = createContext({
   editCarId: -1,
 });
 
-const CarStoreProvider = ({ children }) => {
+export const CarStoreProvider = ({ children }) => {
 
   const [ cars, setCars ] = useState(carsSvc.all());
   const [ editCarId, setEditCarId ] = useState(-1);
@@ -19,12 +19,15 @@ const CarStoreProvider = ({ children }) => {
     editCarId,
     onAddCar(car) {
       setCars(carsSvc.append(car).all());
+      setEditCarId(-1);
     },
     onSaveCar(car) {
       setCars(carsSvc.replace(car).all());
+      setEditCarId(-1);
     },
     onDeleteCar(carId) {
       setCars(carsSvc.remove(carId).all());
+      setEditCarId(-1);
     },
     onEditCar(carId) {
       setEditCarId(carId);
@@ -40,4 +43,8 @@ const CarStoreProvider = ({ children }) => {
     </CarStoreContext.Provider>
   );
 
+};
+
+export const useCarStore = () => {
+  return useContext(CarStoreContext);
 };

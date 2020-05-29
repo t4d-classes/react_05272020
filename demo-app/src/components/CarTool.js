@@ -4,39 +4,20 @@ import { ToolHeader } from './ToolHeader';
 import { CarTable } from './CarTable';
 import { CarForm } from './CarForm';
 
-export const CarTool = (props) => {
-
-  const [ cars, setCars ] = useState(props.cars.concat());
-  const [ editCarId, setEditCarId ] = useState(-1);
-
-  const addCar = (car) => {
-    setCars(cars.concat({
-      ...car,
-      id: Math.max(...cars.map(c => c.id), 0) + 1,
-    }));
-    setEditCarId(-1);
-  };
-
-  const deleteCar = (carId) => {
-    setCars(cars.filter(c => c.id !== carId));
-    setEditCarId(-1);
-  };
-
-  const saveCar = (car) => {
-    const carIndex = cars.findIndex(c => c.id === car.id);
-    const newCars = cars.concat();
-    newCars[carIndex] = car;
-    setCars(newCars);
-    setEditCarId(-1);
-  };
+export const CarTool = ({
+  cars, editCarId,
+  onAddCar, onSaveCar,
+  onDeleteCar, onEditCar,
+  onCancelCar,
+}) => {
 
   return (
     <>
       <ToolHeader headerText="Car Tool" />
       <CarTable cars={cars} editCarId={editCarId}
-        onEditCar={setEditCarId} onDeleteCar={deleteCar}
-        onSaveCar={saveCar} onCancelCar={() => setEditCarId(-1)} />
-      <CarForm onSubmitCar={addCar} buttonText="Add Car" />
+        onEditCar={onEditCar} onDeleteCar={onDeleteCar}
+        onSaveCar={onSaveCar} onCancelCar={onCancelCar} />
+      <CarForm onSubmitCar={onAddCar} buttonText="Add Car" />
     </>
   );
 
