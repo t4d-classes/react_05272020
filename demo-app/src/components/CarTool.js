@@ -15,7 +15,7 @@ export const CarTool = ({
 
     onRefreshCars();
 
-  }, []);
+  }, [ onRefreshCars ]);
 
   return (
     <>

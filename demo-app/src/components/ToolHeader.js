@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export const ToolHeader = (props) => {
+export const ToolHeader = memo((props) => {
+
+  console.log('rendering tool header');
 
   return (
     <header>
@@ -8,4 +10,4 @@ export const ToolHeader = (props) => {
     </header>
   );
 
-};
+});

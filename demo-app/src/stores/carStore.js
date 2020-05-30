@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 
 import { Cars } from '../services/cars';
 
@@ -15,51 +15,52 @@ export const CarStoreProvider = ({ children }) => {
   const [ editCarId, setEditCarId ] = useState(-1);
   const [ errorMessage, setErrorMessage ] = useState('');
 
+  const refreshCars = useCallback(async () => {
+    const cars = await carsSvc.all()
+    setCars(cars);
+  }, []);
+
   const carStoreContextValue = {
     cars,
     editCarId,
     errorMessage,
-    async onRefreshCars() {
+    onRefreshCars: useCallback(async () => {
       try {
-        const cars = await carsSvc.all()
-        setCars(cars);
+        await refreshCars();
       } catch (err) {
         setErrorMessage(err.message);
       }
-    },
+    }, [ refreshCars ]),
     // async onAddCar(car) {
     //   await carsSvc.append(car);
     //   const cars = await carsSvc.all()
     //   setCars(cars);
     //   setEditCarId(-1);
     // },
-    onAddCar(car) {
+    onAddCar: useCallback((car) => {
       return carsSvc
         .append(car)
-        .then(() => carsSvc.all())
-        .then(cars => {
-          setCars(cars);
+        .then(() => refreshCars())
+        .then(() => {
           setEditCarId(-1);
         });
-    },
-    async onSaveCar(car) {
+    }, [ refreshCars ]),
+    onSaveCar: useCallback(async (car) => {
       await carsSvc.replace(car);
-      const cars = await carsSvc.all()
-      setCars(cars);
+      await refreshCars();
       setEditCarId(-1);
-    },
-    async onDeleteCar(carId) {
+    }, [ refreshCars ]),
+    onDeleteCar: useCallback(async (carId) => {
       await carsSvc.remove(carId);
-      const cars = await carsSvc.all()
-      setCars(cars);
+      await refreshCars();
       setEditCarId(-1);
-    },
-    onEditCar(carId) {
+    }, [ refreshCars ]),
+    onEditCar: useCallback((carId) => {
       setEditCarId(carId);
-    },
-    onCancelCar() {
+    }, [ ]),
+    onCancelCar: useCallback(() => {
       setEditCarId(-1);
-    },
+    }, [ ]),
   };
 
   return (

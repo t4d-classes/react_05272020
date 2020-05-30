@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { useForm } from '../hooks/useForm';
 
-export const CarForm = ({ buttonText, onSubmitCar}) => {
+export const CarForm = memo(({ buttonText, onSubmitCar}) => {
+
+  console.log('rendering car form');
 
   const [ carForm, change, resetCarForm ] = useForm({
     make: '', model: '', year: 1900, color: '', price: 0,
@@ -44,7 +46,7 @@ export const CarForm = ({ buttonText, onSubmitCar}) => {
     </form>
   );
 
-};
+});
 
 CarForm.defaultProps = {
   buttonText: 'Submit Car',
